@@ -1,0 +1,5 @@
+# CODEOWNERS
+# 경로 기반으로 그룹 팀 전체에게 리뷰 요청을 자동으로 보내기 위한 설정
+
+/submissions/groupA/  @<ORG_NAME>/group-a
+/submissions/groupB/  @<ORG_NAME>/group-b
