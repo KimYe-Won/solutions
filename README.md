@@ -1,87 +1,78 @@
-# Coding Test Study (GitHub PR 기반 운영)
 
-본 스터디는 **GitHub Organization + Fork → PR** 기반으로 운영되는 코딩 테스트 스터디입니다.  
-목표는 “혼자서는 꾸준히 하기 어려운 코딩테스트 학습”을 **주간 루틴 + 리뷰 시스템**으로 끝까지 완주하는 것입니다.
+## 🔀 브랜치 운영 규칙 (중요)
 
----
+본 스터디는 **main 브랜치 직접 작업을 금지**하고,  
+**개인 브랜치 → PR → merge** 방식으로만 운영합니다.
 
-## 1) 스터디 기본 조건
-
-- 총 인원: 11명
-- 그룹 구성
-  - **GroupA (5명): 1·2팀 통합**
-  - **GroupB (6명): 3팀**
-- 주간 과제: **주당 5문제**
-- 제출 방식: **Fork → PR**
-- PR 병합 조건: **승인 3명 필수**
-- 운영자 포함 누구든 **main 직접 push 금지** (PR로만 반영)
+### 1) 기본 원칙
+- `main` 브랜치
+  - 공용 기준 브랜치
+  - 직접 작업 ❌
+  - 직접 push ❌
+- 개인 브랜치
+  - 모든 작업은 개인 브랜치에서만 수행
+  - PR을 통해서만 `main`에 반영
 
 ---
 
-## 2) 제출 폴더 구조 (강제)
+### 2) 개인 브랜치 사용 규칙 (현재 운영 방식)
 
-반드시 아래 경로로 제출합니다.
-
-- GroupA  
-  `submissions/groupA/{GitHubID}/Wxx/`
-
-- GroupB  
-  `submissions/groupB/{GitHubID}/Wxx/`
+각 스터디원은 **본인 이름의 단일 브랜치**를 사용합니다.
 
 예시:
-- `submissions/groupA/hoseong123/W01/boj_1234.java`
-- `submissions/groupB/helloDev/W03/pgs_150368.py`
+```text
+hosung
+alice
+bob
+````
 
-> 폴더 구조가 틀리면 CODEOWNERS 경로 규칙이 깨져 리뷰 자동 요청이 누락될 수 있습니다.
-
----
-
-## 3) PR 리뷰 방식(핵심)
-
-- PR이 올라오면 **그룹 전체(team)에 자동 리뷰 요청**이 갑니다.
-- 그중 **아무나 3명이 승인하면 merge 가능합니다.**
-- “랜덤으로 2명만 지정” 방식은 사용하지 않습니다.
-- 리뷰가 특정인에게 쏠리지 않게, 매주 각자 최소 2개 이상 리뷰를 권장합니다.
+> 초기 운영 및 테스트 단계에서는
+> 브랜치 관리를 단순화하기 위해 **단일 개인 브랜치 방식**을 사용합니다.
 
 ---
 
-## 4) 15주 커리큘럼
+### 3) 개인 브랜치 생성 방법
 
-- 1주  자료구조
-- 2주  브루트포스
-- 3주  재귀 + 백트래킹
-- 4주  분할정복 + 정렬
-- 5주  이분탐색 + 파라메트릭 서치
-- 6주  그리디
-- 7주  다이나믹 프로그래밍
-- 8주  그래프 + DFS/BFS
-- 9주  최단 경로
-- 10주 서로소 집합 + MST
-- 11주 시뮬레이션
-- 12주 실전 기출(삼성, 카카오)
-- 13주 취약 유형(DP, 이분탐색)
-- 14주 취약 유형(BFS/DFS, 시뮬레이션)
-- 15주 취약 유형(구현, 그리디)
-- 16주~ 랜덤 문제
+```bash
+git checkout main
+git pull origin main
+git checkout -b hosung
+git push -u origin hosung
+```
+
+이후 모든 작업은 항상 아래 상태에서 진행합니다.
+
+```bash
+git checkout hosung
+```
 
 ---
 
-## 5) 운영 규칙 요약
+### 4) PR 생성 규칙
 
-- 매주 5문제 풀이 후 PR 제출
-- PR 제목 규칙 권장:  
-  `[W01][GroupA] {GitHubID} - 5 problems`
-- 리뷰 승인 3명 완료 후 merge
-- merge는 squash merge 권장 (히스토리 깔끔하게 유지)
+* PR 생성 시 설정
 
-자세한 규칙/제출법은 아래 문서를 참고하세요.
-- `docs/rules.md`
-- `docs/how-to-submit.md`
-- `docs/review-checklist.md`
+  * base: `main`
+  * compare: 개인 브랜치 (예: `hosung`)
+* 리뷰 승인 후에만 `main`에 반영 가능
+* `main` 브랜치에 직접 push하는 행위는 금지합니다.
 
 ---
 
-## 6) 참고 레포
+### 5) PR 머지 후 필수 동기화 루틴
 
-아래 레포의 운영 방식을 참고합니다.
-https://github.com/2023-Coding-Test-Study/Coding-Test-Study
+PR이 `main`에 머지된 이후,
+다음 작업을 시작하기 전에 **반드시 아래 과정을 수행합니다.**
+
+```bash
+git checkout main
+git pull origin main
+git checkout hosung
+git merge main
+```
+
+> 이 과정을 생략하면
+> 다음 PR에서 변경 내역이 꼬이거나 불필요한 diff가 발생할 수 있습니다.
+
+---
+
